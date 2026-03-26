@@ -68,17 +68,26 @@ late String password;
                   setState(() {
                     showSpinner = true;
                   });
+
                   try {
-                    final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
-                    if (user != null){
+                    final userCredential = await _auth.signInWithEmailAndPassword(
+                      email: email,
+                      password: password,
+                    );
+
+                    if (userCredential.user != null) {
                       Navigator.pushNamed(context, ChatScreen.id);
                     }
-        setState(() {
-          showSpinner = false;
-        });
-                  }
-                  catch (e){
+
+                    setState(() {
+                      showSpinner = false;
+                    });
+                  } catch (e) {
                     print(e);
+
+                    setState(() {
+                      showSpinner = false;
+                    });
                   }
                 },
               ),
