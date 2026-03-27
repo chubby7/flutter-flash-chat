@@ -29,11 +29,13 @@ late String password;
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Hero(
-                tag: 'logo',
-                child: SizedBox(
-                  height: 200.0,
-                  child: Image.asset('images/logo.png'),
+              Flexible(
+                child: Hero(
+                  tag: 'logo',
+                  child: SizedBox(
+                    height: 200.0,
+                    child: Image.asset('images/logo.png'),
+                  ),
                 ),
               ),
               SizedBox(
@@ -68,23 +70,19 @@ late String password;
                   setState(() {
                     showSpinner = true;
                   });
-
                   try {
                     final userCredential = await _auth.signInWithEmailAndPassword(
                       email: email,
                       password: password,
                     );
-
                     if (userCredential.user != null) {
                       Navigator.pushNamed(context, ChatScreen.id);
                     }
-
                     setState(() {
                       showSpinner = false;
                     });
                   } catch (e) {
                     print(e);
-
                     setState(() {
                       showSpinner = false;
                     });

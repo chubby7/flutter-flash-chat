@@ -29,11 +29,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Hero(
-                tag: 'logo',
-                child: Container(
-                  height: 200.0,
-                  child: Image.asset('images/logo.png'),
+              Flexible(
+                child: Hero(
+                  tag: 'logo',
+                  child: Container(
+                    height: 200.0,
+                    child: Image.asset('images/logo.png'),
+                  ),
                 ),
               ),
               SizedBox(
@@ -72,23 +74,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     setState(() {
                       showSpinner = true;
                     });
-
                     try {
                       final userCredential = await _auth.createUserWithEmailAndPassword(
                         email: email,
                         password: password,
                       );
-
                       if (userCredential.user != null) {
                         Navigator.pushNamed(context, ChatScreen.id);
                       }
-
                       setState(() {
                         showSpinner = false;
                       });
                     } catch (e) {
                       print(e);
-
                       setState(() {
                         showSpinner = false;
                       });
